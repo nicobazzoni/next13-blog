@@ -19,3 +19,5 @@ export const usePreview = definePreview({
     dataset,
     onPublicAccessOnly: onPublicAccessOny,
 })
+
+export default usePreview

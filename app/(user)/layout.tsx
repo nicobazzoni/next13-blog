@@ -10,7 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>
+      <body className='max-2-7xl mx-auto'>
      <Header />
      <Banner />
      

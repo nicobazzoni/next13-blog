@@ -12,6 +12,7 @@ export default function CustomStudioHead() {
         type="image/png"
         sizes="32x32"
         href="https://www.sanity.io/static/images/favicons/favicon-32x32.png"
+      
       />
     </>
   )
