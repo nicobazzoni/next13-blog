@@ -48,7 +48,7 @@ interface Slug {
 interface Block { 
     _key:  string;
     _type: "block";
-    children: Child[];
+    children: Span[];
     markDefs: MarkDef[];
     style: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
 }

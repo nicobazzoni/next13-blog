@@ -9,36 +9,38 @@ import { RichTextComponent } from "../../../components/RichTextComponent"
 
 type Props = {
     params: {
-        slug: string
+        slug: string,
+       
     }
 
-    name: string
+    
 }
 
 async function Post({ params: { slug } }: Props) {
+    
     const query = groq`
-    *[_type == "post" && slug.current == $slug][0] 
-    {...,
-    author->,
-    categories[]->,
-    }
-    `
+       *[_type == "post" && slug.current == $slug][0] 
+      {..., author->, categories[]->}
+    `;
+    
 
     const post: Post = await client.fetch(query, { slug })
     console.log(post)
+
+    const hasAuthor = post.author && post.author.length > 0;
+    const firstAuthor = hasAuthor ? post.author[0] : null;
 
   return (
     <article className="px-10 pb-28"> 
         <section className="space-y-2 border-red-500 text-white">
             <div className="relative min-h-56 flex flex-col md:flex-row justify-between">
                 <div className='absolute top-0 w-full h-full opacity-10 blur-sm p-10'>
-                    <Image  
-                    className='object-cover object-center mx-auto'
-                    src={urlFor(post.mainImage).url()}
-                    alt={post.author.name}
-                    fill
-                    
-                    />
+                <Image  
+                className='object-cover object-center mx-auto'
+                src={urlFor(post.mainImage).url()}
+                alt={firstAuthor ? firstAuthor.name : 'Blog Image'}
+                fill
+            />
                 </div>
                 <section className="p-5 bg-slate-500 w-full">
                     <div className="flex flex-col md:flex-row justify-between gap-y-5">
@@ -54,26 +56,28 @@ async function Post({ params: { slug } }: Props) {
                                     })}
                             </p>
                         </div>
-                        <div>
-                            <Image 
+                        {firstAuthor && (
 
-                            className="rounded-full"
-                            src={urlFor(post.author.image).url()}
-                            alt={post.author.name}
-                            width={40}
-                            height={40}
-                            
-                            />
+                        <div>
+                        <Image 
+                        className="rounded-full "
+                        src={urlFor(firstAuthor.image).url()}
+                        alt={firstAuthor.name}
+                        width={40}
+                        height={40}
+                    />
                         
 
                         <div className="w-64">
                             <h2 className="italic pt-10"> {post.description}</h2>
-                            <h3 className="text-lg font-bold">{post.author.name}</h3>
+                            <h3 className="text-lg font-bold">{firstAuthor.name}</h3>
                             
                             {/* bio */}
                         </div>
                       </div>  
+                        )}
                     </div> 
+                            
                     <div className="flex items-center justify-end mt-auto space-x-2">
                         {post.categories.map((category) => ( 
                             <p  
@@ -89,7 +93,8 @@ async function Post({ params: { slug } }: Props) {
             </div>
         </section>
 
-        <PortableText value={post.body} components={RichTextComponent} />
+        <PortableText value={post.body} components={RichTextComponent as any} />
+
     </article>
   )
 }
