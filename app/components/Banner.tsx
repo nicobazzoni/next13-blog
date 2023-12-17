@@ -6,7 +6,7 @@ function Banner() {
         <div>
             <h1 className='text-7xl'>Nico Bazzoni</h1>
             <h2 className='mt-5 md:mt-0'> my thoughts on 
-            coding <span></span> music
+            <span> coding</span> music
            and other cool stuff
             </h2>
            

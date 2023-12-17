@@ -80,8 +80,8 @@ export const RichTextComponent = {
     link: ({ children, value }: { children: React.ReactNode, value: LinkValue }) => {
       const rel = !value.href.startsWith('/') ? 'noopener noreferrer' : undefined;
       return (
-        <Link href={value.href} rel={rel}>
-          <a className="underline decoration-red-500 hover:decoration-black">{children}</a>
+        <Link href={value.href} rel={rel}className="underline decoration-red-500 hover:decoration-black">
+          {children}
         </Link>
       );
     },
