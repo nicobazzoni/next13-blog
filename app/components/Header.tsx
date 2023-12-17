@@ -9,9 +9,9 @@ function Header() {
     space-x-2 font0bold px-10 py-5'>
         <div> 
             <Link href='/'>
-                <Image className='h-8 w-8' src='/nico-photo.jpg' height={8} width={8} alt='logo'/>
+                <Image className='h-8 w-8 rounded-full' src='/nico-photo.jpg' height={8} width={8} alt='logo'/>
             </Link>
-            <h1>NICO</h1>
+            <h1>programming and arts blog</h1>
         </div>
 
         <div>
