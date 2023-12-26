@@ -7,6 +7,7 @@ type Props = {
 }
 
 function BlogList({ posts }: Props) {
+    console.log(posts, 'posts')
    
   return (
     <div>
@@ -14,6 +15,7 @@ function BlogList({ posts }: Props) {
 
         <div>
             {posts.map((post) => (
+                console.log(post, 'post'),
                 <ClientSideRoute key={post._id} route={`/post/${post.slug.current}`}>
             <div key={post._id} className='flex flex-col group cursor-pointer'> 
                 <div className='relative w-full h-80 drop-shadow-xl 
